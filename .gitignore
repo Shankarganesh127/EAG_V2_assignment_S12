@@ -1,0 +1,53 @@
+# Local credentials (keep shareable examples)
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Python environments, bytecode, and packaging
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test, lint, and type-check caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+
+# Agent runtime state and generated artifacts
+/action/sandbox_state/
+/memory/session_logs/
+/memory/session_summaries_index/
+/dom_dumps/
+/media/screenshots/
+/media/pdf/
+/mcp_servers/faiss_index/
+*.log
+
+# Local browser profiles and automation reports
+playwright-report/
+test-results/
+browser_profiles/
+
+# Editor and operating-system files
+.idea/
+.vscode/
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
