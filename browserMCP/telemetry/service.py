@@ -33,18 +33,21 @@ class ProductTelemetry:
 	"""
 	Service for capturing anonymized telemetry data.
 
-	If the environment variable `ANONYMIZED_TELEMETRY=False`, anonymized telemetry will be disabled.
+	Telemetry is disabled by default. It is only enabled when `ANONYMIZED_TELEMETRY=true`
+	AND `POSTHOG_PROJECT_API_KEY` is set in the environment.
 	"""
 
 	USER_ID_PATH = str(xdg_cache_home() / 'browserMCP' / 'telemetry_user_id')
-	PROJECT_API_KEY = 'phc_F8JMNjW1i2KbGUTaW1unnDdLSPCoyc52SGRU0JecaUh'
+	PROJECT_API_KEY = os.getenv('POSTHOG_PROJECT_API_KEY')
 	HOST = 'https://eu.i.posthog.com'
 	UNKNOWN_USER_ID = 'UNKNOWN'
 
 	_curr_user_id = None
 
 	def __init__(self) -> None:
-		telemetry_disabled = os.getenv('ANONYMIZED_TELEMETRY', 'true').lower() == 'false'
+		telemetry_disabled = (
+			os.getenv('ANONYMIZED_TELEMETRY', 'false').lower() != 'true' or not self.PROJECT_API_KEY
+		)
 		self.debug_logging = os.getenv('browserMCP_LOGGING_LEVEL', 'info').lower() == 'debug'
 
 		if telemetry_disabled:
